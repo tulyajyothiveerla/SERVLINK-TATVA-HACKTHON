@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ServLink - Local Service Providers Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/10/03/08/20251003084051-K054PYQ7.js" defer></script>
+    
+  <style>
+    body {
+  font-family: 'Comic Relief', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  color: #222;
+}
+
+h1, h2, h3 {
+  font-family: 'Comic Relief', sans-serif;
+  font-weight: 700; /* bold */
+}
+
+button, .book-btn {
+  font-family: 'Comic Relief', sans-serif;
+  font-weight: 400; /* normal */
+}
+
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #111827;
+    }
+    
+    .main-container {
+      display: flex;
+    }
+
+    #map { 
+      height: calc(100vh - 64px);
+      flex-grow: 1;
+    }
+
+    .controls {
+      background: rgba(17, 24, 39, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      width: 320px;
+      color: white;
+      box-shadow: 4px 0 15px rgba(0,0,0,0.5);
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .controls label {
+      display: block;
+      margin-bottom: 12px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #f1c40f;
+    }
+
+    #provider-list {
+      flex-grow: 1;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .provider-item {
+      background: #374151;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transition: 0.3s;
+    }
+
+    .provider-item:hover {
+      background: #4B5563;
+    }
+    
+    .provider-name {
+      color: #fcd34d;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+      background: none;
+      border: none;
+      padding: 0;
+      width: 100%;
+      text-align: left;
+    }
+
+    .provider-address {
+      font-size: 14px;
+      color: #D1D5DB;
+      margin-top: 4px;
+    }
+    
+    .nav-link {
+        color: white;
+        transition: color 0.2s ease-in-out;
+    }
+    .nav-link:hover {
+        color: #facc15;
+    }
+
+    .book-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 6px 12px;
+      background: #dc2626;
+      color: white;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .book-btn:hover {
+      background: #b91c1c;
+    }
+
+    #location-btn {
+      margin-top: 16px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      background: #fcd34d;
+      color: black;
+      transition: 0.2s;
+    }
+  </style>
+</head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Service Provider Map</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Comic Relief', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f7fa;
+    }
+
+    .sidebar {
+      font-family: 'Comic Relief', sans-serif;
+      background: #fff;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .provider-name {
+      font-weight: 700;
+    }
+
+    .book-btn {
+      background: #007bff;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Comic Relief', sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <header class="p-4 sm:p-6 sticky top-0 z-10 bg-black shadow-lg">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-3xl font-extrabold tracking-tight">
+                <span class="text-red-600">Serv</span><span class="text-white">Link</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="homecs.html" class="nav-link">Home</a>
+                <a href="servicescs.html" class="nav-link">Services</a>
+                <a href="providerscs.html" class="nav-link text-yellow-300">Providers</a>
+                <a href="aboutcs.html" class="nav-link">About</a>
+                <a href="contactcs.html" class="nav-link">Contact</a>
+
+                <div class="relative group">
+                    <a href="loginsignupcs.html" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-200 flex items-center" aria-label="Login or Signup">
+                        <i class='bx bx-user mr-2'></i>
+                        Login/Signup
+                    </a>
+                </div>
+            </div>
+
+            <button class="md:hidden text-white text-3xl" onclick="toggleMobileMenu()" aria-label="Toggle Mobile Menu">
+                <i class='bx bx-menu'></i>
+            </button>
+        </nav>
+    </header>
+  <div id="mobile-menu" class="hidden md:hidden bg-gray-900 p-4 shadow-xl z-10">
+      <a href="homecs.html" class="block py-2 nav-link text-center">Home</a>
+      <a href="servicescs.html" class="block py-2 nav-link text-center">Services</a>
+      <a href="providerscs.html" class="block py-2 nav-link text-yellow-300 text-center">Providers</a>
+      <a href="about.html" class="block py-2 nav-link text-center">About</a>
+      <a href="contact.html" class="block py-2 nav-link text-center">Contact</a>
+      <div class="mt-4 border-t border-gray-700 pt-4">
+          <a href="homepr.html" class="w-full block bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-full mb-2 text-center">Log In</a>
+          <a href="homepr.html" class="w-full block bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-full text-center">Sign Up</a>
+      </div>
+  </div>
+  <div class="main-container">
+    <div id="sidebar-controls" class="controls">
+      <label>🔧 Service Providers</label>
+      <div class="relative mb-4">
+        <input type="text" id="search-bar" placeholder="Search by name, service, or city..." class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-400">
+        <i class='bx bx-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400'></i>
+      </div>
+      <ul id="provider-list"></ul>
+      <button id="location-btn">Find My Location</button>
+    </div>
+  
+    <div id="map"></div>
+  </div>
+
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    const touristSpots = [
+      // Andhra Pradesh
+  { position: { lat: 17.6868, lng: 83.2185 }, name: "Visakhapatnam Tutoring Hub", category: "Tutoring", description: "Visakhapatnam, Andhra Pradesh" },
+  { position: { lat: 16.5062, lng: 80.6480 }, name: "Vijayawada Tech Repair Hub", category: "Tech Repair", description: "Vijayawada, Andhra Pradesh" },
+  { position: { lat: 16.3067, lng: 80.4365 }, name: "Guntur Cleaning Hub", category: "Cleaning", description: "Guntur, Andhra Pradesh" },
+  { position: { lat: 14.4426, lng: 79.9865 }, name: "Nellore Plumbing Hub", category: "Plumbing", description: "Nellore, Andhra Pradesh" },
+  { position: { lat: 15.8281, lng: 78.0373 }, name: "Kurnool Tutoring Hub", category: "Tutoring", description: "Kurnool, Andhra Pradesh" },
+
+  // Arunachal Pradesh
+  { position: { lat: 27.0844, lng: 93.6053 }, name: "Itanagar Tutoring Hub", category: "Tutoring", description: "Itanagar, Arunachal Pradesh" },
+  { position: { lat: 27.1047, lng: 93.6950 }, name: "Naharlagun Tech Repair Hub", category: "Tech Repair", description: "Naharlagun, Arunachal Pradesh" },
+  { position: { lat: 28.0667, lng: 95.3333 }, name: "Pasighat Cleaning Hub", category: "Cleaning", description: "Pasighat, Arunachal Pradesh" },
+
+  // Assam
+  { position: { lat: 26.1445, lng: 91.7362 }, name: "Guwahati Tutoring Hub", category: "Tutoring", description: "Guwahati, Assam" },
+  { position: { lat: 24.8333, lng: 92.7789 }, name: "Silchar Tech Repair Hub", category: "Tech Repair", description: "Silchar, Assam" },
+  { position: { lat: 26.4956, lng: 90.5396 }, name: "Bongaigaon Cleaning Hub", category: "Cleaning", description: "Bongaigaon, Assam" },
+  { position: { lat: 26.4480, lng: 92.0266 }, name: "Tezpur Plumbing Hub", category: "Plumbing", description: "Tezpur, Assam" },
+
+  // Bihar
+  { position: { lat: 25.5941, lng: 85.1376 }, name: "Patna Tutoring Hub", category: "Tutoring", description: "Patna, Bihar" },
+  { position: { lat: 26.1226, lng: 85.3906 }, name: "Muzaffarpur Tech Repair Hub", category: "Tech Repair", description: "Muzaffarpur, Bihar" },
+  { position: { lat: 25.1590, lng: 85.8674 }, name: "Gaya Cleaning Hub", category: "Cleaning", description: "Gaya, Bihar" },
+  { position: { lat: 25.8620, lng: 85.7800 }, name: "Darbhanga Plumbing Hub", category: "Plumbing", description: "Darbhanga, Bihar" },
+
+  // Chhattisgarh
+  { position: { lat: 21.2514, lng: 81.6296 }, name: "Raipur Tutoring Hub", category: "Tutoring", description: "Raipur, Chhattisgarh" },
+  { position: { lat: 22.0796, lng: 82.1391 }, name: "Bilaspur Tech Repair Hub", category: "Tech Repair", description: "Bilaspur, Chhattisgarh" },
+  { position: { lat: 20.7072, lng: 81.5542 }, name: "Durg Cleaning Hub", category: "Cleaning", description: "Durg, Chhattisgarh" },
+
+  // Goa
+  { position: { lat: 15.4909, lng: 73.8278 }, name: "Panaji Tutoring Hub", category: "Tutoring", description: "Panaji, Goa" },
+  { position: { lat: 15.2993, lng: 74.1240 }, name: "Margao Tech Repair Hub", category: "Tech Repair", description: "Margao, Goa" },
+  { position: { lat: 15.4026, lng: 73.8157 }, name: "Mapusa Cleaning Hub", category: "Cleaning", description: "Mapusa, Goa" },
+
+  // Gujarat
+  { position: { lat: 23.0225, lng: 72.5714 }, name: "Ahmedabad Tutoring Hub", category: "Tutoring", description: "Ahmedabad, Gujarat" },
+  { position: { lat: 22.3072, lng: 73.1812 }, name: "Vadodara Tech Repair Hub", category: "Tech Repair", description: "Vadodara, Gujarat" },
+  { position: { lat: 21.1702, lng: 72.8311 }, name: "Surat Cleaning Hub", category: "Cleaning", description: "Surat, Gujarat" },
+  { position: { lat: 22.4707, lng: 70.0577 }, name: "Rajkot Plumbing Hub", category: "Plumbing", description: "Rajkot, Gujarat" },
+
+  // Haryana
+  { position: { lat: 28.4595, lng: 77.0266 }, name: "Gurugram Tutoring Hub", category: "Tutoring", description: "Gurugram, Haryana" },
+  { position: { lat: 29.0588, lng: 76.0856 }, name: "Rohtak Tech Repair Hub", category: "Tech Repair", description: "Rohtak, Haryana" },
+  { position: { lat: 29.6857, lng: 76.9905 }, name: "Panipat Cleaning Hub", category: "Cleaning", description: "Panipat, Haryana" },
+  { position: { lat: 30.6942, lng: 76.8606 }, name: "Ambala Plumbing Hub", category: "Plumbing", description: "Ambala, Haryana" },
+
+  // Himachal Pradesh
+  { position: { lat: 31.1048, lng: 77.1734 }, name: "Shimla Tutoring Hub", category: "Tutoring", description: "Shimla, Himachal Pradesh" },
+  { position: { lat: 32.2432, lng: 77.1892 }, name: "Manali Tech Repair Hub", category: "Tech Repair", description: "Manali, Himachal Pradesh" },
+  { position: { lat: 31.6810, lng: 76.5222 }, name: "Hamirpur Cleaning Hub", category: "Cleaning", description: "Hamirpur, Himachal Pradesh" },
+
+  // Jharkhand
+  { position: { lat: 23.3441, lng: 85.3096 }, name: "Ranchi Tutoring Hub", category: "Tutoring", description: "Ranchi, Jharkhand" },
+  { position: { lat: 22.8046, lng: 86.2029 }, name: "Jamshedpur Tech Repair Hub", category: "Tech Repair", description: "Jamshedpur, Jharkhand" },
+  { position: { lat: 23.7957, lng: 86.4304 }, name: "Dhanbad Cleaning Hub", category: "Cleaning", description: "Dhanbad, Jharkhand" },
+  { position: { lat: 24.4800, lng: 85.2800 }, name: "Hazaribagh Plumbing Hub", category: "Plumbing", description: "Hazaribagh, Jharkhand" },
+
+  // Karnataka
+  { position: { lat: 12.9716, lng: 77.5946 }, name: "Bengaluru Tutoring Hub", category: "Tutoring", description: "Bengaluru, Karnataka" },
+  { position: { lat: 15.3173, lng: 75.7139 }, name: "Hubli Tech Repair Hub", category: "Tech Repair", description: "Hubli, Karnataka" },
+  { position: { lat: 15.3647, lng: 75.1240 }, name: "Belagavi Cleaning Hub", category: "Cleaning", description: "Belagavi, Karnataka" },
+  { position: { lat: 12.9141, lng: 74.8560 }, name: "Mangaluru Plumbing Hub", category: "Plumbing", description: "Mangaluru, Karnataka" },
+
+  // Kerala
+  { position: { lat: 9.9312, lng: 76.2673 }, name: "Kochi Tutoring Hub", category: "Tutoring", description: "Kochi, Kerala" },
+  { position: { lat: 8.5241, lng: 76.9366 }, name: "Thiruvananthapuram Tech Repair Hub", category: "Tech Repair", description: "Thiruvananthapuram, Kerala" },
+  { position: { lat: 10.5276, lng: 76.2144 }, name: "Thrissur Cleaning Hub", category: "Cleaning", description: "Thrissur, Kerala" },
+  { position: { lat: 11.2588, lng: 75.7804 }, name: "Kozhikode Plumbing Hub", category: "Plumbing", description: "Kozhikode, Kerala" },
+
+  // Madhya Pradesh
+  { position: { lat: 23.2599, lng: 77.4126 }, name: "Bhopal Tutoring Hub", category: "Tutoring", description: "Bhopal, Madhya Pradesh" },
+  { position: { lat: 22.7196, lng: 75.8577 }, name: "Indore Tech Repair Hub", category: "Tech Repair", description: "Indore, Madhya Pradesh" },
+  { position: { lat: 24.5854, lng: 80.8322 }, name: "Satna Cleaning Hub", category: "Cleaning", description: "Satna, Madhya Pradesh" },
+  { position: { lat: 23.8315, lng: 79.4427 }, name: "Jabalpur Plumbing Hub", category: "Plumbing", description: "Jabalpur, Madhya Pradesh" },
+
+  // Maharashtra
+  { position: { lat: 19.0760, lng: 72.8777 }, name: "Mumbai Tutoring Hub", category: "Tutoring", description: "Mumbai, Maharashtra" },
+  { position: { lat: 18.5204, lng: 73.8567 }, name: "Pune Tech Repair Hub", category: "Tech Repair", description: "Pune, Maharashtra" },
+  { position: { lat: 20.3899, lng: 78.1307 }, name: "Wardha Cleaning Hub", category: "Cleaning", description: "Wardha, Maharashtra" },
+  { position: { lat: 21.1458, lng: 79.0882 }, name: "Nagpur Plumbing Hub", category: "Plumbing", description: "Nagpur, Maharashtra" },
+
+  // Manipur
+  { position: { lat: 24.8170, lng: 93.9368 }, name: "Imphal Tutoring Hub", category: "Tutoring", description: "Imphal, Manipur" },
+  { position: { lat: 24.7536, lng: 93.8986 }, name: "Thoubal Tech Repair Hub", category: "Tech Repair", description: "Thoubal, Manipur" },
+  { position: { lat: 24.5030, lng: 93.9966 }, name: "Bishnupur Cleaning Hub", category: "Cleaning", description: "Bishnupur, Manipur" },
+
+  // Meghalaya
+  { position: { lat: 25.5788, lng: 91.8933 }, name: "Shillong Tutoring Hub", category: "Tutoring", description: "Shillong, Meghalaya" },
+  { position: { lat: 25.5689, lng: 91.8700 }, name: "Tura Tech Repair Hub", category: "Tech Repair", description: "Tura, Meghalaya" },
+  { position: { lat: 25.5211, lng: 91.8317 }, name: "Jowai Cleaning Hub", category: "Cleaning", description: "Jowai, Meghalaya" },
+
+  // Mizoram
+  { position: { lat: 23.7271, lng: 92.7176 }, name: "Aizawl Tutoring Hub", category: "Tutoring", description: "Aizawl, Mizoram" },
+  { position: { lat: 23.6160, lng: 92.8295 }, name: "Lunglei Tech Repair Hub", category: "Tech Repair", description: "Lunglei, Mizoram" },
+  { position: { lat: 23.7500, lng: 92.7167 }, name: "Champhai Cleaning Hub", category: "Cleaning", description: "Champhai, Mizoram" },
+
+  // Nagaland
+  { position: { lat: 25.6751, lng: 94.1086 }, name: "Kohima Tutoring Hub", category: "Tutoring", description: "Kohima, Nagaland" },
+  { position: { lat: 26.1584, lng: 94.5624 }, name: "Dimapur Tech Repair Hub", category: "Tech Repair", description: "Dimapur, Nagaland" },
+  { position: { lat: 25.8684, lng: 94.1342 }, name: "Mokokchung Cleaning Hub", category: "Cleaning", description: "Mokokchung, Nagaland" },
+
+  // Odisha
+  { position: { lat: 20.2961, lng: 85.8245 }, name: "Bhubaneswar Tutoring Hub", category: "Tutoring", description: "Bhubaneswar, Odisha" },
+  { position: { lat: 19.3130, lng: 84.7929 }, name: "Berhampur Tech Repair Hub", category: "Tech Repair", description: "Berhampur, Odisha" },
+  { position: { lat: 22.2030, lng: 84.8616 }, name: "Rourkela Cleaning Hub", category: "Cleaning", description: "Rourkela, Odisha" },
+  { position: { lat: 20.4674, lng: 85.8820 }, name: "Cuttack Plumbing Hub", category: "Plumbing", description: "Cuttack, Odisha" },
+
+  // Punjab
+  { position: { lat: 30.7333, lng: 76.7794 }, name: "Chandigarh Tutoring Hub", category: "Tutoring", description: "Chandigarh (Punjab side)" },
+  { position: { lat: 31.6340, lng: 74.8723 }, name: "Amritsar Tech Repair Hub", category: "Tech Repair", description: "Amritsar, Punjab" },
+  { position: { lat: 30.9000, lng: 75.8573 }, name: "Ludhiana Cleaning Hub", category: "Cleaning", description: "Ludhiana, Punjab" },
+  { position: { lat: 30.3398, lng: 76.3869 }, name: "Patiala Plumbing Hub", category: "Plumbing", description: "Patiala, Punjab" },
+
+  // Rajasthan
+  { position: { lat: 26.9124, lng: 75.7873 }, name: "Jaipur Tutoring Hub", category: "Tutoring", description: "Jaipur, Rajasthan" },
+  { position: { lat: 26.4499, lng: 74.6399 }, name: "Ajmer Tech Repair Hub", category: "Tech Repair", description: "Ajmer, Rajasthan" },
+  { position: { lat: 27.5520, lng: 76.6346 }, name: "Alwar Cleaning Hub", category: "Cleaning", description: "Alwar, Rajasthan" },
+  { position: { lat: 25.4358, lng: 75.6370 }, name: "Kota Plumbing Hub", category: "Plumbing", description: "Kota, Rajasthan" },
+
+  // Sikkim
+  { position: { lat: 27.3389, lng: 88.6065 }, name: "Gangtok Tutoring Hub", category: "Tutoring", description: "Gangtok, Sikkim" },
+  { position: { lat: 27.3275, lng: 88.6120 }, name: "Namchi Tech Repair Hub", category: "Tech Repair", description: "Namchi, Sikkim" },
+  { position: { lat: 27.2354, lng: 88.6192 }, name: "Gyalshing Cleaning Hub", category: "Cleaning", description: "Gyalshing, Sikkim" },
+
+  // Tamil Nadu
+  { position: { lat: 13.0827, lng: 80.2707 }, name: "Chennai Tutoring Hub", category: "Tutoring", description: "Chennai, Tamil Nadu" },
+  { position: { lat: 11.0168, lng: 76.9558 }, name: "Coimbatore Tech Repair Hub", category: "Tech Repair", description: "Coimbatore, Tamil Nadu" },
+  { position: { lat: 11.6643, lng: 78.1460 }, name: "Salem Cleaning Hub", category: "Cleaning", description: "Salem, Tamil Nadu" },
+  { position: { lat: 8.7139, lng: 77.7567 }, name: "Tirunelveli Plumbing Hub", category: "Plumbing", description: "Tirunelveli, Tamil Nadu" },
+
+  // Telangana
+  { position: { lat: 17.3850, lng: 78.4867 }, name: "Hyderabad Tutoring Hub", category: "Tutoring", description: "Hyderabad, Telangana" },
+  { position: { lat: 18.1124, lng: 79.0193 }, name: "Warangal Tech Repair Hub", category: "Tech Repair", description: "Warangal, Telangana" },
+  { position: { lat: 16.5062, lng: 80.6480 }, name: "Nizamabad Cleaning Hub", category: "Cleaning", description: "Nizamabad, Telangana" },
+  { position: { lat: 17.6805, lng: 77.9850 }, name: "Mahbubnagar Plumbing Hub", category: "Plumbing", description: "Mahbubnagar, Telangana" },
+
+  // Tripura
+  { position: { lat: 23.8315, lng: 91.2868 }, name: "Agartala Tutoring Hub", category: "Tutoring", description: "Agartala, Tripura" },
+  { position: { lat: 23.8400, lng: 91.2800 }, name: "Udaipur Tech Repair Hub", category: "Tech Repair", description: "Udaipur, Tripura" },
+  { position: { lat: 24.1954, lng: 92.2607 }, name: "Dharmanagar Cleaning Hub", category: "Cleaning", description: "Dharmanagar, Tripura" },
+
+  // Uttar Pradesh
+  { position: { lat: 26.8467, lng: 80.9462 }, name: "Lucknow Tutoring Hub", category: "Tutoring", description: "Lucknow, Uttar Pradesh" },
+  { position: { lat: 25.3176, lng: 82.9739 }, name: "Varanasi Tech Repair Hub", category: "Tech Repair", description: "Varanasi, Uttar Pradesh" },
+  { position: { lat: 28.9845, lng: 77.7064 }, name: "Meerut Cleaning Hub", category: "Cleaning", description: "Meerut, Uttar Pradesh" },
+  { position: { lat: 27.1767, lng: 78.0081 }, name: "Agra Plumbing Hub", category: "Plumbing", description: "Agra, Uttar Pradesh" },
+
+  // Uttarakhand
+  { position: { lat: 30.3165, lng: 78.0322 }, name: "Dehradun Tutoring Hub", category: "Tutoring", description: "Dehradun, Uttarakhand" },
+  { position: { lat: 29.3919, lng: 79.4542 }, name: "Haldwani Tech Repair Hub", category: "Tech Repair", description: "Haldwani, Uttarakhand" },
+  { position: { lat: 29.2183, lng: 79.5120 }, name: "Nainital Cleaning Hub", category: "Cleaning", description: "Nainital, Uttarakhand" },
+
+  // West Bengal
+  { position: { lat: 22.5726, lng: 88.3639 }, name: "Kolkata Tutoring Hub", category: "Tutoring", description: "Kolkata, West Bengal" },
+  { position: { lat: 23.1645, lng: 87.9721 }, name: "Durgapur Tech Repair Hub", category: "Tech Repair", description: "Durgapur, West Bengal" },
+  { position: { lat: 23.8103, lng: 86.4110 }, name: "Asansol Cleaning Hub", category: "Cleaning", description: "Asansol, West Bengal" },
+  { position: { lat: 26.7271, lng: 88.3953 }, name: "Siliguri Plumbing Hub", category: "Plumbing", description: "Siliguri, West Bengal" },
+
+  // --- Union Territories ---
+  // Andaman & Nicobar
+  { position: { lat: 11.6670, lng: 92.7356 }, name: "Port Blair Tutoring Hub", category: "Tutoring", description: "Port Blair, Andaman & Nicobar Islands" },
+
+  // Chandigarh
+  { position: { lat: 30.7333, lng: 76.7794 }, name: "Chandigarh Cleaning Hub", category: "Cleaning", description: "Chandigarh, UT" },
+
+  // Dadra & Nagar Haveli and Daman & Diu
+  { position: { lat: 20.3974, lng: 72.8328 }, name: "Daman Tech Repair Hub", category: "Tech Repair", description: "Daman, UT" },
+  { position: { lat: 20.2763, lng: 73.0169 }, name: "Silvassa Plumbing Hub", category: "Plumbing", description: "Silvassa, UT" },
+
+  // Delhi
+  { position: { lat: 28.7041, lng: 77.1025 }, name: "Delhi Tutoring Hub", category: "Tutoring", description: "New Delhi, Delhi" },
+
+  // Jammu & Kashmir
+  { position: { lat: 34.0837, lng: 74.7973 }, name: "Srinagar Tutoring Hub", category: "Tutoring", description: "Srinagar, J&K" },
+  { position: { lat: 32.7266, lng: 74.8570 }, name: "Jammu Tech Repair Hub", category: "Tech Repair", description: "Jammu, J&K" },
+
+  // Ladakh
+  { position: { lat: 34.1526, lng: 77.5770 }, name: "Leh Cleaning Hub", category: "Cleaning", description: "Leh, Ladakh" },
+  { position: { lat: 33.9990, lng: 78.0000 }, name: "Kargil Plumbing Hub", category: "Plumbing", description: "Kargil, Ladakh" },
+
+  // Lakshadweep
+  { position: { lat: 10.5667, lng: 72.6169 }, name: "Kavaratti Tutoring Hub", category: "Tutoring", description: "Kavaratti, Lakshadweep" },
+
+  // Puducherry
+  { position: { lat: 11.9416, lng: 79.8083 }, name: "Puducherry Tech Repair Hub", category: "Tech Repair", description: "Puducherry, UT" },
+  { position: { lat: 10.7650, lng: 79.8431 }, name: "Karaikal Cleaning Hub", category: "Cleaning", description: "Karaikal, UT" }
+];
+
+    const searchBar = document.getElementById('search-bar');
+    searchBar.addEventListener('keyup', () => {
+        const searchTerm = searchBar.value.toLowerCase();
+        
+        const filteredSpots = touristSpots.filter(spot => {
+            const nameMatch = spot.name.toLowerCase().includes(searchTerm);
+            const descriptionMatch = spot.description.toLowerCase().includes(searchTerm);
+            const categoryMatch = spot.category.toLowerCase().includes(searchTerm);
+            return nameMatch || descriptionMatch || categoryMatch;
+        });
+        
+        populateProviderList(filteredSpots);
+    });
+
+    let map, markers = [], infowindow, userLocation = null, userLocationMarker = null;
+
+    const categoryColors = {
+      Plumbing: '#1E90FF',
+      Tutoring: '#32CD32',
+      Cleaning: '#FFD700',
+      'Tech Repair': '#FF4500'};
+
+    function createCustomMarker(color) {return {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: color,
+        fillOpacity: 1,
+        strokeColor: '#FFFFFF',
+        strokeWeight: 2,
+        scale: 8
+      }; }
+function populateProviderList(spots) {
+      const list = document.getElementById("provider-list");
+      list.innerHTML = "";
+
+      spots.forEach((spot, index) => {
+        const li = document.createElement("li");
+        li.className = "provider-item";
+
+        const nameBtn = document.createElement("button");
+        nameBtn.className = "provider-name";
+        nameBtn.innerText = spot.name;
+        nameBtn.onclick = () => {
+          map.setCenter(spot.position);
+          map.setZoom(12);
+          google.maps.event.trigger(markers[index], "click");
+        };
+
+        const address = document.createElement("div");
+        address.className = "provider-address";
+        address.innerText = spot.description;
+
+        const bookBtn = document.createElement("a");
+        
+        // *** CRITICAL CHANGE: Use checkAuthAndBook function ***
+        bookBtn.onclick = () => checkAuthAndBook(spot.name, spot.category, spot.description);
+        bookBtn.href = 'javascript:void(0)'; // Prevent default link action
+        
+        bookBtn.className = "book-btn";
+        bookBtn.innerText = "Book Now";
+
+        li.appendChild(nameBtn);
+        li.appendChild(address);
+        li.appendChild(bookBtn);
+
+        list.appendChild(li);
+      });
+    }
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 6,
+        center: { lat: 22.9734, lng: 78.6569 }, // Center of India
+        styles: [
+          { elementType: "geometry", stylers: [{ color: "#1d2c4d" }] },
+          { elementType: "labels.text.fill", stylers: [{ color: "#8ec3b9" }] },
+          { elementType: "labels.text.stroke", stylers: [{ color: "#1a3646" }] },
+          {
+            featureType: "administrative.country",
+            elementType: "geometry.stroke",
+            stylers: [{ color: "#4b6878" }],
+          },
+          {
+            featureType: "administrative.land_parcel",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#64779e" }],
+          },
+          {
+            featureType: "poi",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#6f9ba5" }],
+          },
+          {
+            featureType: "road",
+            elementType: "geometry",
+            stylers: [{ color: "#304a7d" }],
+          },
+          {
+            featureType: "road",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#98a5be" }],
+          },
+          {
+            featureType: "road",
+            elementType: "labels.text.stroke",
+            stylers: [{ color: "#1d2c4d" }],
+          },
+          {
+            featureType: "water",
+            elementType: "geometry",
+            stylers: [{ color: "#0e1626" }],
+          },
+          {
+            featureType: "water",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#4e6d70" }],
+          },
+        ],
+      });
+
+      infowindow = new google.maps.InfoWindow();
+      populateProviderList(touristSpots);
+      addMarkers(touristSpots);
+    }
+
+    function addMarkers(spots) {
+      markers.forEach(marker => marker.setMap(null));
+      markers = [];
+
+      spots.forEach(spot => {
+        const marker = new google.maps.Marker({
+          position: spot.position,
+          map,
+          icon: createCustomMarker(categoryColors[spot.category] || "#ffffff"),
+        });
+
+        marker.addListener("click", () => {
+          infowindow.setContent(`<strong>${spot.name}</strong><br>${spot.description}<br><em>${spot.category}</em>`);
+          infowindow.open(map, marker);
+        });
+
+        markers.push(marker);
+      });
+    }
+
+    document.getElementById("location-btn").addEventListener("click", () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+          const position = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude
+          };
+
+          if (userLocationMarker) {
+            userLocationMarker.setMap(null);
+          }
+
+          userLocationMarker = new google.maps.Marker({
+            position,
+            map,
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              fillColor: "#00BFFF",
+              fillOpacity: 1,
+              strokeColor: "#fff",
+              strokeWeight: 2,
+              scale: 10,
+            },
+          });
+
+          map.setCenter(position);
+          map.setZoom(10);
+        });
+      } else {
+        alert("Geolocation not supported.");
+      }
+    });
+    function createMarkers() {
+      markers.forEach(marker => marker.setMap(null));
+      markers = [];
+
+      touristSpots.forEach(spot => {
+        const marker = new google.maps.Marker({
+          position: spot.position, map: map, title: spot.name, icon: createCustomMarker(categoryColors[spot.category])
+        });
+        marker.addListener("click", () => openInfoWindow(spot, marker));
+        markers.push(marker);
+      });}
+
+    function openInfoWindow(spot, marker) { const content = `<div class="info-window-content"><img src="${spot.image}" alt="${spot.name}"><strong style="color:${categoryColors[spot.category]}">${spot.name}</strong><div>${spot.description}</div></div>`;
+      infowindow.setContent(content);
+      infowindow.open(map, marker); }
+
+    function focusOnProvider(providerName) {
+      const spot = touristSpots.find(s => s.name === providerName);
+      if (!spot) return;
+    
+      const marker = markers.find(m => m.getTitle() === providerName);
+      map.panTo(spot.position);
+      map.setZoom(14);
+      openInfoWindow(spot, marker);
+    }
+
+    function findAndMarkUserLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          if (userLocationMarker) userLocationMarker.setMap(null);
+          userLocationMarker = new google.maps.Marker({
+            position: userLocation, map: map, title: "Your Location", icon: { path: google.maps.SymbolPath.CIRCLE, scale: 8, fillColor: "#fcd34d", fillOpacity: 1, strokeColor: "black", strokeWeight: 2 }
+          });
+          map.setCenter(userLocation);
+          map.setZoom(10);
+        }, () => { alert("Location access denied."); });
+      } else {
+        alert("Your browser doesn't support geolocation.");
+      }
+    }
+  </script>
+
+  <script src="script.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkt4uwJrOHwVBCp-VQynCrdD4VrPmt5MU&callback=initMap" async defer></script>
+</body>
+</html><!DOCTYPE html>

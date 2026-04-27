@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ServLink - Provider Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+        body { 
+        background: url(bg.png) no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Comic Relief', sans-serif; 
+        }
+    body {
+        font-family: 'Comic Relief', sans-serif;
+        background-color: #000;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    .nav-link {
+        color: white;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        transition: color 0.2s;
+        font-weight: 700;
+    }
+    .nav-link:hover {
+        color: #fcd34d;
+    }
+    /* Provider specific input style matching homepr.html glass-box-red theme */
+    .auth-input-pr {
+      background-color: rgba(30, 0, 0, 0.5); /* Dark red background */
+      border: 1px solid #dc2626; /* Red border */
+      color: white;
+      transition: border-color 0.2s;
+    }
+    .auth-input-pr:focus {
+      border-color: #fcd34d; /* Yellow focus border */
+      outline: none;
+      box-shadow: 0 0 0 1px #fcd34d;
+    }
+    /* Tab styles for the provider page */
+    .tab-button-pr {
+        color: #9ca3af;
+        border-color: transparent;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s ease;
+    }
+    .tab-button-pr:hover:not(.active) {
+        color: #dc2626;
+    }
+    .tab-button-pr.active {
+        border-color: #fcd34d; /* Yellow active border */
+        color: white;
+        font-weight: 600;
+    }
+    .provider-error-message {
+        color: #f87171; /* Text-red-400 */
+        font-size: 0.875rem; /* text-sm */
+        margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+
+    <header class="p-4 sm:p-6 w-full sticky top-0 bg-black shadow-lg z-10">
+        <nav class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="text-3xl font-extrabold tracking-tight">
+                <span class="text-red-600">Serv</span><span class="text-white">Link</span>
+            </div>
+            
+            <div class="flex space-x-6 items-center">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                
+                <a href="loginpr.html" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-full transition duration-200 flex items-center nav-link active">
+                    <i class='bx bx-wrench mr-2'></i> Provider Hub
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="w-full max-w-md p-8 sm:p-10 rounded-2xl shadow-2xl text-white glass-box-red">
+            <h1 id="auth-title" class="text-4xl font-extrabold mb-6 text-center text-red-400">
+                Provider Login
+            </h1>
+            
+            <!-- Tab Navigation for Login/Signup -->
+            <div class="flex mb-8 border-b border-gray-700">
+                <button 
+                    id="provider-login-tab"
+                    onclick="switchProviderForm('login')" 
+                    class="tab-button-pr flex-1 py-3 text-lg font-semibold border-b-2"
+                >
+                    <i class='bx bx-door-open mr-2'></i> Log In
+                </button>
+                <button 
+                    id="provider-signup-tab"
+                    onclick="switchProviderForm('signup')" 
+                    class="tab-button-pr flex-1 py-3 text-lg font-semibold border-b-2"
+                >
+                    <i class='bx bx-user-plus mr-2'></i> Create Account
+                </button>
+            </div>
+
+            <!-- Provider Login Form -->
+            <form id="provider-login-form" class="space-y-6" onsubmit="handleProviderLogin(event)">
+                <div>
+                    <label for="provider-login-email" class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                    <input type="email" id="provider-login-email" class="auth-input-pr w-full p-3 rounded-lg focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                    <p id="provider-login-email-error" class="provider-error-message hidden">Please enter a valid email.</p>
+                </div>
+                <div>
+                    <label for="provider-login-password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                    <input type="password" id="provider-login-password" class="auth-input-pr w-full p-3 rounded-lg focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                    <p id="provider-login-password-error" class="provider-error-message hidden">Password is required.</p>
+                </div>
+                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition duration-200 flex items-center justify-center">
+                    <i class='bx bx-door-open mr-2'></i> Secure Login
+                </button>
+            </form>
+            
+            <!-- Provider Signup Form -->
+            <form id="provider-signup-form" class="space-y-6 hidden" onsubmit="handleProviderSignup(event)">
+                 <div>
+                    <label for="provider-signup-name" class="block text-sm font-medium text-gray-300 mb-2">Business/Full Name</label>
+                    <input type="text" id="provider-signup-name" class="auth-input-pr w-full p-3 rounded-lg focus:ring-yellow-500 focus:border-yellow-500 transition" required minlength="3">
+                    <p id="provider-signup-name-error" class="provider-error-message hidden">Name must be at least 3 characters.</p>
+                </div>
+                <div>
+                    <label for="provider-signup-email" class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                    <input type="email" id="provider-signup-email" class="auth-input-pr w-full p-3 rounded-lg focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                    <p id="provider-signup-email-error" class="provider-error-message hidden">Please enter a valid email address.</p>
+                </div>
+                <div>
+                    <label for="provider-signup-password" class="block text-sm font-medium text-gray-300 mb-2">Set Password</label>
+                    <input type="password" id="provider-signup-password" class="auth-input-pr w-full p-3 rounded-lg focus:ring-yellow-500 focus:border-yellow-500 transition" required minlength="6">
+                    <p id="provider-signup-password-error" class="provider-error-message hidden">Password must be at least 6 characters.</p>
+                </div>
+                <div>
+                    <label for="provider-signup-confirm-password" class="block text-sm font-medium text-gray-300 mb-2">Confirm Password</label>
+                    <input type="password" id="provider-signup-confirm-password" class="auth-input-pr w-full p-3 rounded-lg focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                    <p id="provider-signup-confirm-password-error" class="provider-error-message hidden">Passwords do not match.</p>
+                </div>
+                <div>
+                    <label for="provider-auth-code" class="block text-sm font-medium text-gray-300 mb-2 flex items-center">
+                        <i class='bx bx-key mr-2'></i>Provider Authentication Code
+                    </label>
+                    <input type="text" id="provider-auth-code" placeholder="Format: PRV-XXXXXXXX" class="auth-input-pr w-full p-3 rounded-lg focus:ring-yellow-500 focus:border-yellow-500 transition" required>
+                    <p id="provider-auth-code-error" class="provider-error-message hidden">Code must be PRV- followed by 8 alphanumeric characters.</p>
+                </div>
+                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition duration-200 flex items-center justify-center">
+                    <i class='bx bx-user-plus mr-2'></i> Create Provider Account
+                </button>
+            </form>
+
+
+            <p id="provider-auth-message" class="mt-6 text-center text-yellow-400 hidden font-bold"></p>
+            
+        </div>
+    </main>
+    
+    <script src="script.js"></script>
+    <script>
+        // Initialize the view
+        document.addEventListener('DOMContentLoaded', () => {
+            document.documentElement.classList.add('dark');
+            // Ensure login tab is active on load
+            switchProviderForm('login');
+        });
+    </script>
+</body>
+</html>

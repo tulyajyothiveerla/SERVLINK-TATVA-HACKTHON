@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ServLink - About Us</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { 
+        background: url(bg.png) no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Comic Relief', sans-serif; 
+        font-family: 'Comic Relief', sans-serif; 
+        }
+</style>
+<body>
+
+<header class="p-4 sm:p-6 sticky top-0 z-10 bg-black shadow-lg">
+    <nav class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="text-3xl font-extrabold tracking-tight">
+            <span class="text-red-600">Serv</span><span class="text-white">Link</span>
+        </div>
+        
+        <div class="hidden md:flex space-x-6 items-center">
+            <a href="homecs.html" class="nav-link text-yellow-300">Home</a>
+            <a href="servicescs.html" class="nav-link">Services</a>
+            <a href="providerscs.html" class="nav-link">Providers</a>
+            <a href="aboutcs.html" class="nav-link">About</a>
+            <a href="contactcs.html" class="nav-link">Contact</a>
+
+            <div class="relative group">
+                <a href="loginsignupcs.html" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-200 flex items-center" aria-label="Login or Signup">
+                    <i class='bx bx-user mr-2'></i>
+                    Login/Signup
+                </a>
+            </div>
+        </div>
+
+        <button class="md:hidden text-white text-3xl" onclick="toggleMobileMenu()" aria-label="Toggle Mobile Menu">
+            <i class='bx bx-menu'></i>
+        </button>
+    </nav>
+</header>
+
+    <div id="mobile-menu" class="hidden-dropdown md:hidden bg-gray-800 p-4 shadow-xl z-20">
+        <a href="homecs.html" class="block py-2 nav-link text-center">Home</a>
+        <a href="servicescs.html" class="block py-2 nav-link text-center">Services</a>
+        <a href="providerscs.html" class="block py-2 nav-link text-center">Providers</a>
+        <a href="aboutcs.html" class="block py-2 nav-link text-center">About</a>
+        <a href="contactcs.html" class="block py-2 nav-link text-center">Contact</a>
+        <div class="mt-4 border-t border-gray-700 pt-4">
+            <a href="loginsignupcs.html" class="w-full block bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-full mb-2 text-center"><LogIn>
+            <Signup></Signup></a>
+        </div>
+    </div>
+
+
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 text-white">
+        <h1 class="text-3xl sm:text-4xl font-bold mb-6 mt-4">Welcome to Your ServLink Hub</h1>
+        
+        <div class="mb-8 p-4 glass-box rounded-xl shadow-lg flex items-center">
+            <i class='bx bx-search text-3xl text-red-500 mr-4'></i>
+            <input type="text" placeholder="Search for plumbers, tutors, cooks, and more..." class="w-full bg-transparent border-none focus:ring-0 text-lg placeholder-gray-400" aria-label="Search services" />
+            <button class="bg-red-600 p-2 rounded-full hover:bg-red-700 transition" aria-label="Filter Services">
+                <i class='bx bx-filter text-xl'></i>
+            </button>
+        </div>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-semibold mb-4 text-red-400 flex items-center">
+                <i class='bx bx-trending-up mr-2'></i> Trending Services Nearby
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-box p-5 rounded-xl shadow-2xl hover:bg-gray-700/70 transition duration-300 transform hover:scale-[1.02] cursor-pointer">
+                    <i class='bx bx-gas-pump text-4xl text-yellow-500 mb-3'></i>
+                    <h3 class="font-bold text-xl">Emergency Plumbing</h3>
+                    <p class="text-gray-400 text-sm mt-1">Fix leaks fast with trusted local pros.</p>
+                </div>
+                <div class="glass-box p-5 rounded-xl shadow-2xl hover:bg-gray-700/70 transition duration-300 transform hover:scale-[1.02] cursor-pointer">
+                    <i class='bx bx-book-reader text-4xl text-green-500 mb-3'></i>
+                    <h3 class="font-bold text-xl">Math Tutoring (K-12)</h3>
+                    <p class="text-gray-400 text-sm mt-1">Community-vetted educators.</p>
+                </div>
+                <div class="glass-box p-5 rounded-xl shadow-2xl hover:bg-gray-700/70 transition duration-300 transform hover:scale-[1.02] cursor-pointer">
+                    <i class='bx bx-food-menu text-4xl text-blue-500 mb-3'></i>
+                    <h3 class="font-bold text-xl">Home Cooking Service</h3>
+                    <p class="text-gray-400 text-sm mt-1">Meal prep from local chefs.</p>
+                </div>
+                <div class="glass-box p-5 rounded-xl shadow-2xl hover:bg-gray-700/70 transition duration-300 transform hover:scale-[1.02] cursor-pointer">
+                    <i class='bx bx-paint-roll text-4xl text-pink-500 mb-3'></i>
+                    <h3 class="font-bold text-xl">Interior Painting</h3>
+                    <p class="text-gray-400 text-sm mt-1">Trusted, rated, and reliable painters.</p>
+                </div>
+            </div>
+        </section>
+        <section id="recent-orders-section" class="mb-10">
+            <h2 class="text-2xl font-semibold mb-4 text-yellow-400 flex items-center">
+                <i class='bx bx-history mr-2'></i> Your Recent Bookings
+            </h2>
+            <div id="recent-orders-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <p class="text-gray-400 p-4 col-span-3">Loading order history...</p>
+            </div>
+        </section>
+    </main>
+<script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/10/03/08/20251003084051-K054PYQ7.js" defer></script>
+
+    <script src="script.js"></script>
+</body>
+</html>

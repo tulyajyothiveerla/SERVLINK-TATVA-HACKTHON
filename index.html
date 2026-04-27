@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ServLink - Community Services Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+      body {
+          font-family: 'Comic Relief', sans-serif;
+          background-image: url("homebg.gif");
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+          display: flex;
+          flex-direction: column;
+      }
+      #content-wrapper {
+          min-height: 100vh;
+          flex-grow: 1;
+      }
+  </style>
+</head>
+<body>
+  <div id="content-wrapper">
+      <header class="p-4 sm:p-6 sticky top-0 z-10 bg-transparent">
+          <nav class="max-w-6xl mx-auto flex justify-between items-center">
+              <div class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                  <span class="text-red-600">Serv</span><span class="text-white">Link</span>
+              </div>
+              <div class="flex space-x-2 sm:space-x-6">
+                  <a href="index.html" class="nav-link">Home</a>
+                  <a href="about.html" class="nav-link">About</a>
+                  <a href="contact.html" class="nav-link">Contact</a>
+              </div>
+          </nav>
+      </header>
+      <main class="flex-grow flex items-center justify-center p-4">
+          <div class="text-center max-w-2xl w-full">
+              <h1 class="text-4xl sm:text-6xl font-extrabold text-white mb-4 drop-shadow-lg">Connect. Trust. Grow.</h1>
+              <p class="text-xl sm:text-2xl text-gray-200 mb-12 drop-shadow-md">Choose your role to get started with ServLink, the community-driven service hub.</p>
+              <div class="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-10">
+                  <button onclick="setRole('customer')" class="role-button p-8 sm:p-10 rounded-2xl shadow-lg flex flex-col items-center flex-1 max-w-xs mx-auto">
+                      <i class='bx bx-shopping-bag bx-lg text-6xl mb-3 text-red-400'></i>
+                      <span class="text-2xl font-bold">Customer</span>
+                      <span class="text-sm mt-1 text-gray-300">Find the perfect local service.</span>
+                  </button>
+                  <button onclick="setRole('provider')" class="role-button p-8 sm:p-10 rounded-2xl shadow-lg flex flex-col items-center flex-1 max-w-xs mx-auto">
+                      <i class='bx bx-wrench bx-lg text-6xl mb-3 text-red-400'></i>
+                      <span class="text-2xl font-bold">Provider</span>
+                      <span class="text-sm mt-1 text-gray-300">Grow your business, keep your income.</span>
+                  </button>
+              </div>
+              <p id="role-status" class="mt-12 text-lg text-yellow-300 font-medium"></p>
+          </div>
+      </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

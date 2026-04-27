@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ServLink - Login/Signup</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+        body { 
+        background: url(bg.png) no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Comic Relief', sans-serif; 
+        }
+    body {
+      font-family: 'Comic Relief', sans-serif;
+      background-color: #000;
+      min-height: 100vh;
+    }
+
+    /* Styles matching contactcs.html */
+    .nav-link {
+      color: white;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      transition: color 0.2s;
+      font-weight: 700;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fcd34d; /* Yellow hover/active */
+    }
+
+    .glass-box {
+      background-color: rgba(17, 24, 39, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(220, 38, 38, 0.4);
+    }
+
+    .auth-input {
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      color: white;
+      transition: border-color 0.2s;
+    }
+    .auth-input:focus {
+      border-color: #dc2626;
+      outline: none;
+      box-shadow: 0 0 0 1px #dc2626;
+    }
+
+    .error-message {
+      color: #f87171; /* Text-red-400 */
+      font-size: 0.875rem; /* text-sm */
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body class="flex flex-col">
+
+  <header class="p-4 sm:p-6 sticky top-0 z-10 bg-black shadow-lg">
+    <nav class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="text-3xl font-extrabold tracking-tight">
+        <span class="text-red-600">Serv</span><span class="text-white">Link</span>
+      </div>
+
+      <div class="flex items-center space-x-6">
+        <a href="homecs.html" class="nav-link">Home</a>
+        <a href="servicescs.html" class="nav-link">Services</a>
+        <a href="providerscs.html" class="nav-link">Providers</a>
+        <a href="aboutcs.html" class="nav-link">About</a>
+        <a href="contactcs.html" class="nav-link">Contact</a>
+
+        <a href="loginsignupcs.html" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-200 flex items-center nav-link active">
+            <i class='bx bx-user mr-2'></i>
+            Login/Signup
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="flex-grow flex items-center justify-center p-6 sm:p-8">
+    <div class="glass-box p-8 w-full max-w-md rounded-xl shadow-2xl text-white">
+      
+      <h1 class="text-4xl font-extrabold mb-6 text-red-500 text-center" id="form-title">
+        Customer Login
+      </h1>
+
+      <div class="flex mb-6 border border-red-600 rounded-lg overflow-hidden">
+        <button id="login-tab" class="flex-1 py-2 font-bold transition duration-200 bg-red-600 text-white" onclick="switchForm('login')">
+          Login
+        </button>
+        <button id="signup-tab" class="flex-1 py-2 font-bold transition duration-200 bg-transparent text-gray-300 hover:bg-red-700/20" onclick="switchForm('signup')">
+          Signup
+        </button>
+      </div>
+
+      <form id="login-form" class="space-y-5" onsubmit="handleLogin(event)">
+        <div>
+          <label for="login-email" class="block text-sm font-medium text-gray-400 mb-1">Email</label>
+          <input type="email" id="login-email" class="auth-input w-full p-3 rounded-lg" required>
+          <p id="login-email-error" class="error-message hidden"></p>
+        </div>
+        <div>
+          <label for="login-password" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
+          <input type="password" id="login-password" class="auth-input w-full p-3 rounded-lg" required>
+          <p id="login-password-error" class="error-message hidden"></p>
+        </div>
+        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition duration-200">
+          <i class='bx bx-log-in mr-2'></i> Login
+        </button>
+        <p id="login-message" class="text-center font-bold"></p>
+      </form>
+
+      <form id="signup-form" class="space-y-5 hidden" onsubmit="handleSignup(event)">
+        <div>
+          <label for="signup-name" class="block text-sm font-medium text-gray-400 mb-1">Full Name</label>
+          <input type="text" id="signup-name" class="auth-input w-full p-3 rounded-lg" required minlength="3">
+          <p id="signup-name-error" class="error-message hidden">Name must be at least 3 characters.</p>
+        </div>
+        <div>
+          <label for="signup-email" class="block text-sm font-medium text-gray-400 mb-1">Email</label>
+          <input type="email" id="signup-email" class="auth-input w-full p-3 rounded-lg" required>
+          <p id="signup-email-error" class="error-message hidden">Please enter a valid email address.</p>
+        </div>
+        <div>
+          <label for="signup-password" class="block text-sm font-medium text-gray-400 mb-1">Password</label>
+          <input type="password" id="signup-password" class="auth-input w-full p-3 rounded-lg" required minlength="6">
+          <p id="signup-password-error" class="error-message hidden">Password must be at least 6 characters.</p>
+        </div>
+        <div>
+          <label for="signup-confirm-password" class="block text-sm font-medium text-gray-400 mb-1">Confirm Password</label>
+          <input type="password" id="signup-confirm-password" class="auth-input w-full p-3 rounded-lg" required>
+          <p id="signup-confirm-password-error" class="error-message hidden">Passwords do not match.</p>
+        </div>
+        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition duration-200">
+          <i class='bx bx-user-plus mr-2'></i> Create Account
+        </button>
+        <p id="signup-message" class="text-center font-bold"></p>
+      </form>
+
+    </div>
+  </main>
+
+  <script>
+    document.documentElement.classList.add('dark'); // Ensure dark mode
+
+    // --- Form Switching Logic ---
+    function switchForm(formType) {
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+      const loginTab = document.getElementById('login-tab');
+      const signupTab = document.getElementById('signup-tab');
+      const formTitle = document.getElementById('form-title');
+
+      // Reset messages and errors
+      document.getElementById('login-message').textContent = '';
+      document.getElementById('signup-message').textContent = '';
+      clearAllErrors();
+      
+      if (formType === 'login') {
+        loginForm.classList.remove('hidden');
+        signupForm.classList.add('hidden');
+        loginTab.classList.add('bg-red-600', 'text-white');
+        loginTab.classList.remove('bg-transparent', 'text-gray-300', 'hover:bg-red-700/20');
+        signupTab.classList.remove('bg-red-600', 'text-white');
+        signupTab.classList.add('bg-transparent', 'text-gray-300', 'hover:bg-red-700/20');
+        formTitle.textContent = 'Customer Login';
+      } else {
+        signupForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+        signupTab.classList.add('bg-red-600', 'text-white');
+        signupTab.classList.remove('bg-transparent', 'text-gray-300', 'hover:bg-red-700/20');
+        loginTab.classList.remove('bg-red-600', 'text-white');
+        loginTab.classList.add('bg-transparent', 'text-gray-300', 'hover:bg-red-700/20');
+        formTitle.textContent = 'Customer Signup';
+      }
+    }
+
+    // --- Validation and Error Handling ---
+    function showError(elementId, message) {
+      const errorElement = document.getElementById(elementId);
+      if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.classList.remove('hidden');
+      }
+      return false;
+    }
+
+    function clearError(elementId) {
+      const errorElement = document.getElementById(elementId);
+      if (errorElement) {
+        errorElement.classList.add('hidden');
+      }
+    }
+
+    function clearAllErrors() {
+        document.querySelectorAll('.error-message').forEach(el => el.classList.add('hidden'));
+    }
+
+    function isValidEmail(email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    function getStoredUsers() {
+      // Retrieves users from local storage
+      const users = localStorage.getItem('servlinkUsers');
+      return users ? JSON.parse(users) : [];
+    }
+
+    function saveUsers(users) {
+      // Saves the user array back to local storage
+      localStorage.setItem('servlinkUsers', JSON.stringify(users));
+    }
+
+    // --- Signup Handler ---
+    function handleSignup(event) {
+      event.preventDefault();
+      clearAllErrors();
+      
+      const name = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-password').value;
+      const confirmPassword = document.getElementById('signup-confirm-password').value;
+      const messageElement = document.getElementById('signup-message');
+
+      let isValid = true;
+
+      // Validate Name (minimum 3 characters)
+      if (name.length < 3) {
+        isValid = showError('signup-name-error', 'Full Name must be at least 3 characters.');
+      } else {
+        clearError('signup-name-error');
+      }
+
+      // Validate Email
+      if (!isValidEmail(email)) {
+        isValid = showError('signup-email-error', 'Please enter a valid email address.');
+      } else {
+        clearError('signup-email-error');
+      }
+
+      // Validate Password (minimum 6 characters)
+      if (password.length < 6) {
+        isValid = showError('signup-password-error', 'Password must be at least 6 characters.');
+      } else {
+        clearError('signup-password-error');
+      }
+
+      // Validate Confirm Password
+      if (password !== confirmPassword) {
+        isValid = showError('signup-confirm-password-error', 'Passwords do not match.');
+      } else {
+        clearError('signup-confirm-password-error');
+      }
+      
+      if (!isValid) {
+        messageElement.textContent = 'Please correct the errors in the form.';
+        messageElement.style.color = '#f87171'; // Red
+        return;
+      }
+
+      // Local Storage Logic
+      let users = getStoredUsers();
+
+      // Check if user already exists
+      if (users.some(user => user.email === email)) {
+        messageElement.textContent = 'This email is already registered. Try logging in.';
+        messageElement.style.color = '#fcd34d'; // Yellow
+        showError('signup-email-error', 'Email already exists.');
+        return;
+      }
+
+      // Store new user
+      const newUser = {
+        name: name,
+        email: email,
+        password: password // NOTE: For a real application, NEVER store passwords in plain text!
+      };
+      
+      users.push(newUser);
+      saveUsers(users);
+
+      messageElement.textContent = `🎉 Account created successfully for ${name}! Please login now.`;
+      messageElement.style.color = '#34d399'; // Green
+
+      // Switch to login after a delay and pre-fill email
+      setTimeout(() => {
+        document.getElementById('signup-form').reset();
+        switchForm('login');
+        document.getElementById('login-email').value = email; // Pre-fill login email
+        document.getElementById('login-message').textContent = 'Account created. Please log in.';
+        document.getElementById('login-message').style.color = '#34d399';
+      }, 1500);
+    }
+
+    // --- Login Handler ---
+    function handleLogin(event) {
+      event.preventDefault();
+      clearAllErrors();
+
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      const messageElement = document.getElementById('login-message');
+
+      let isValid = true;
+
+      // Basic validation
+      if (!isValidEmail(email)) {
+        isValid = showError('login-email-error', 'Please enter a valid email address.');
+      } else {
+        clearError('login-email-error');
+      }
+
+      if (password.length === 0) {
+        isValid = showError('login-password-error', 'Password is required.');
+      } else {
+        clearError('login-password-error');
+      }
+
+      if (!isValid) {
+        messageElement.textContent = 'Please fix the input errors.';
+        messageElement.style.color = '#f87171';
+        return;
+      }
+
+      // Local Storage Logic
+      const users = getStoredUsers();
+      const user = users.find(u => u.email === email && u.password === password);
+
+      if (user) {
+        // Successful login
+        messageElement.textContent = `👋 Welcome back, ${user.name}! Redirecting to Home...`;
+        messageElement.style.color = '#34d399'; // Green
+
+        // Store active session data
+        localStorage.setItem('servlinkActiveUser', JSON.stringify({ email: user.email, name: user.name }));
+
+        // *** REDIRECT TO homecs.html ***
+        setTimeout(() => {
+            window.location.href = 'homecs.html'; 
+        }, 1000); 
+
+      } else {
+        // Failed login
+        messageElement.textContent = 'Invalid email or password. Please try again.';
+        messageElement.style.color = '#f87171'; // Red
+      }
+    }
+
+    // Initial load: switch to login form
+    window.onload = () => {
+        switchForm('login');
+    };
+  </script>
+</body>
+</html>

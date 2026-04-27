@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ServLink - About Us</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/10/03/08/20251003084051-K054PYQ7.js" defer></script>
+<style>    body { 
+        background: url(bg.png) no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Comic Relief', sans-serif; 
+        }</style>
+<body>
+
+    <header class="p-4 sm:p-6 sticky top-0 z-10 bg-black shadow-lg">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-3xl font-extrabold tracking-tight">
+                <span class="text-red-600">Serv</span><span class="text-white">Link</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="homecs.html" class="nav-link">Home</a>
+                <a href="servicescs.html" class="nav-link text-yellow-300">Services</a>
+                <a href="providerscs.html" class="nav-link">Providers</a>
+                <a href="aboutcs.html" class="nav-link">About</a>
+                <a href="contactcs.html" class="nav-link">Contact</a>
+
+                <div class="hidden md:flex space-x-6 items-center">
+    <div class="relative group">
+        <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-200 flex items-center" aria-label="Login or Signup">
+            <i class='bx bx-user mr-2'></i>
+            Login/Signup
+        </button>
+    </div>
+</div>
+            </div>
+
+            <button class="md:hidden text-white text-3xl" onclick="toggleMobileMenu()" aria-label="Toggle Mobile Menu">
+                <i class='bx bx-menu'></i>
+            </button>
+        </nav>
+    </header>
+    <main class="max-w-7xl mx-auto p-6 sm:p-8 text-white">
+        <h1 class="text-4xl font-extrabold mb-4 text-red-500">Local Service Marketplace</h1>
+        <p class="text-lg text-gray-300 mb-10">Find community-vetted providers by category. Click to view local professionals.</p>
+        
+        <div class="mb-10 p-4 glass-box rounded-xl shadow-lg flex items-center">
+            <i class='bx bx-search text-3xl text-red-500 mr-4'></i>
+            <input type="text" placeholder="Search for a specific service or provider..." class="w-full bg-transparent border-none focus:ring-0 text-lg placeholder-gray-400" aria-label="Search services" />
+            <button class="bg-red-600 p-2 rounded-full hover:bg-red-700 transition" aria-label="Filter services">
+                <i class='bx bx-filter text-xl'></i>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4">
+            <!-- Service Cards -->
+            <div onclick="openServiceModal('plumbing')" class="glass-box p-6 rounded-xl service-card cursor-pointer flex items-center space-x-6">
+                <i class='bx bx-water text-5xl text-red-400'></i>
+                <div>
+                    <h3 class="font-bold text-xl">Plumbing</h3>
+                    <p class="text-gray-400 text-sm mt-1">Leak repair & installations</p>
+                </div>
+            </div>
+            <div onclick="openServiceModal('electrical')" class="glass-box p-6 rounded-xl service-card cursor-pointer flex items-center space-x-6">
+                <i class='bx bx-bolt-circle text-5xl text-red-400'></i>
+                <div>
+                    <h3 class="font-bold text-xl">Electrical Work</h3>
+                    <p class="text-gray-400 text-sm mt-1">Wiring, repairs & lighting</p>
+                </div>
+            </div>
+            <div onclick="openServiceModal('tutoring')" class="glass-box p-6 rounded-xl service-card cursor-pointer flex items-center space-x-6">
+                <i class='bx bx-book-reader text-5xl text-red-400'></i>
+                <div>
+                    <h3 class="font-bold text-xl">Tutoring</h3>
+                    <p class="text-gray-400 text-sm mt-1">Academic help for all levels</p>
+                </div>
+            </div>
+            <div onclick="openServiceModal('cleaning')" class="glass-box p-6 rounded-xl service-card cursor-pointer flex items-center space-x-6">
+                <i class='bx bx-home-alt text-5xl text-red-400'></i>
+                <div>
+                    <h3 class="font-bold text-xl">Home Cleaning</h3>
+                    <p class="text-gray-400 text-sm mt-1">Routine & deep cleaning</p>
+                </div>
+            </div>
+            <div onclick="openServiceModal('cooking')" class="glass-box p-6 rounded-xl service-card cursor-pointer flex items-center space-x-6">
+                <i class='bx bx-restaurant text-5xl text-red-400'></i>
+                <div>
+                    <h3 class="font-bold text-xl">Cooking & Meal Prep</h3>
+                    <p class="text-gray-400 text-sm mt-1">Local chefs for hire</p>
+                </div>
+            </div>
+            <div onclick="openServiceModal('handyman')" class="glass-box p-6 rounded-xl service-card cursor-pointer flex items-center space-x-6">
+                <i class='bx bx-wrench text-5xl text-red-400'></i>
+                <div>
+                    <h3 class="font-bold text-xl">Handyman Services</h3>
+                    <p class="text-gray-400 text-sm mt-1">General home repairs</p>
+                </div>
+            </div>
+            <div onclick="openServiceModal('petcare')" class="glass-box p-6 rounded-xl service-card cursor-pointer flex items-center space-x-6">
+                <i class='bx bx-walk text-5xl text-red-400'></i>
+                <div>
+                    <h3 class="font-bold text-xl">Pet Care</h3>
+                    <p class="text-gray-400 text-sm mt-1">Walking, sitting, and care</p>
+                </div>
+            </div>
+            <div onclick="openServiceModal('gardening')" class="glass-box p-6 rounded-xl service-card cursor-pointer flex items-center space-x-6">
+                <i class='bx bx-leaf text-5xl text-red-400'></i>
+                <div>
+                    <h3 class="font-bold text-xl">Gardening & Lawn</h3>
+                    <p class="text-gray-400 text-sm mt-1">Mowing and landscaping</p>
+                </div>
+            </div>
+            <div onclick="openServiceModal('techrepair')" class="glass-box p-6 rounded-xl service-card cursor-pointer flex items-center space-x-6">
+                <i class='bx bx-desktop text-5xl text-red-400'></i>
+                <div>
+                    <h3 class="font-bold text-xl">Tech Repair</h3>
+                    <p class="text-gray-400 text-sm mt-1">Computer & device fixing</p>
+                </div>
+            </div>
+            <div onclick="openServiceModal('transport')" class="glass-box p-6 rounded-xl service-card cursor-pointer flex items-center space-x-6">
+                <i class='bx bx-car text-5xl text-red-400'></i>
+                <div>
+                    <h3 class="font-bold text-xl">Local Transport</h3>
+                    <p class="text-gray-400 text-sm mt-1">Driving services & errands</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div id="mobile-menu" class="hidden-dropdown md:hidden bg-gray-800 p-4 shadow-xl z-20">
+        <a href="homecs.html" class="block py-2 nav-link text-center">Home</a>
+        <a href="servicescs.html" class="block py-2 nav-link text-center">Services</a>
+        <a href="providerscs.html" class="block py-2 nav-link text-center">Providers</a>
+        <a href="about.html" class="block py-2 nav-link text-center">About</a>
+        <a href="contact.html" class="block py-2 nav-link text-center">Contact</a>
+        <div class="mt-4 border-t border-gray-700 pt-4">
+            <a href="homepr.html" class="w-full block bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-full mb-2 text-center">Log In</a>
+            <a href="homepr.html" class="w-full block bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-full text-center">Sign Up</a>
+        </div>
+    </div>
+    
+    <div id="service-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content-glass p-8 rounded-2xl shadow-2xl w-full max-w-lg mx-4 relative">
+            <button onclick="closeServiceModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition text-3xl z-20" aria-label="Close modal">
+                <i class='bx bx-x'></i>
+            </button>
+            
+            <div class="text-center py-4">
+                <i id="modal-icon" class='bx bx-help-circle text-6xl text-red-400 mb-4'></i>
+                <h2 id="modal-title" class="text-3xl font-bold mb-4 text-red-300">Service Title</h2>
+                <p id="modal-description" class="text-lg text-gray-200 mb-8 text-left">
+                    This is the detailed description of the service category.
+                </p>
+            </div>
+            
+            <button 
+                id="find-providers-btn"
+                class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition duration-200 uppercase tracking-widest text-lg"
+            >
+                Find Service Providers
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

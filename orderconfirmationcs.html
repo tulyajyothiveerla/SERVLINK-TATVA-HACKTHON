@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServLink - Booking Confirmed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+            body { 
+        background: url(bg.png) no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Comic Relief', sans-serif; 
+        }
+        body {
+            font-family: 'Comic Relief', sans-serif;
+            background-color: #000;
+            min-height: 100vh;
+        }
+        .nav-link {
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            transition: color 0.2s;
+            font-weight: 700;
+        }
+        .nav-link:hover {
+            color: #fcd34d; /* Yellow hover/active */
+        }
+        .glass-box {
+            background-color: rgba(17, 24, 39, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(220, 38, 38, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="p-4 sm:p-6 sticky top-0 z-10 bg-black shadow-lg">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-3xl font-extrabold tracking-tight">
+                <span class="text-red-600">Serv</span><span class="text-white">Link</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="homecs.html" class="nav-link">Home</a>
+                <a href="servicescs.html" class="nav-link">Services</a>
+                <a href="providerscs.html" class="nav-link">Providers</a>
+                <a href="aboutcs.html" class="nav-link">About</a>
+                <a href="contactcs.html" class="nav-link">Contact</a>
+
+                <div class="relative group">
+                    <a href="loginsignupcs.html" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-200 flex items-center" aria-label="Login or Signup">
+                        <i class='bx bx-user mr-2'></i>
+                        Login/Signup
+                    </a>
+                </div>
+            </div>
+
+            <button class="md:hidden text-white text-3xl" onclick="toggleMobileMenu()" aria-label="Toggle Mobile Menu">
+                <i class='bx bx-menu'></i>
+            </button>
+        </nav>
+    </header>
+
+   <main class="flex-grow flex items-center justify-center p-6 sm:p-8">
+    <div class="glass-box p-8 w-full max-w-2xl rounded-xl shadow-2xl text-white text-center">
+
+        <i class='bx bxs-check-circle text-7xl text-green-500 mb-6'></i>
+        <h1 class="text-4xl font-extrabold mb-4 text-red-500">Booking Confirmed!</h1>
+        <p class="text-xl text-gray-300 mb-8">
+            Your request has been **accepted and confirmed** by the service provider. They will contact you shortly via the ServLink chat or email.
+        </p>
+
+        <div class="bg-gray-800/70 p-6 rounded-lg text-left mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-300 border-b border-gray-700 pb-2">Order Details</h2>
+            
+            <h2 class="text-2xl font-bold mb-4 text-yellow-300 border-b border-gray-700 pb-2">Order Details</h2>
+            <div class="space-y-3 text-lg">
+                <div class="flex justify-between">
+                    <span class="font-semibold text-gray-400">Provider:</span>
+                    <span id="order-provider-name" class="font-bold text-white"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-semibold text-gray-400">Service:</span>
+                    <span id="order-service-category" class="font-bold text-red-400"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-semibold text-gray-400">Location:</span>
+                    <span id="order-location" class="text-white"></span>
+                </div>
+                
+                <div class="flex justify-between">
+                    <span class="font-semibold text-gray-400">Booking Time:</span>
+                    <span id="order-booking-time" class="font-bold text-yellow-300"></span>
+                </div>
+                
+                <div class="flex justify-between">
+                    <span class="font-semibold text-gray-400">Provider Contact:</span>
+                    <span id="order-provider-contact" class="font-bold text-yellow-300"></span>
+                </div>
+                
+                <div class="flex justify-between">
+                    <span class="font-semibold text-gray-400">Payment Method:</span>
+                    <span id="order-payment-method" class="text-white"></span>
+                </div>
+                <div class="pt-4 border-t border-gray-700 flex justify-between">
+                    <span class="font-extrabold text-white">Total Charge:</span>
+                    <span id="order-total-amount" class="font-extrabold text-yellow-300 text-2xl"></span>
+                </div>
+            </div>
+        </div>
+
+        <a href="homecs.html" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-200 text-lg mt-4">
+            Return to Home Hub
+        </a>
+    </div>
+</main>
+
+    <script src="script.js"></script>
+</body>
+</html>

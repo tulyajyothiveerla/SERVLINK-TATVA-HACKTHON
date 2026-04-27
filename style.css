@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #000;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+.nav-link {
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    transition: color 0.2s;
+    font-weight: 500;
+}
+.nav-link:hover {
+    color: #fcd34d;
+}
+
+.glass-box {
+    background-color: rgba(17, 24, 39, 0.5);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(220, 38, 38, 0.4); 
+}
+
+/* --- Modal Styles (Z-index fixed) --- */
+#service-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 20; /* Increased z-index to ensure it sits above the sticky header (z-10) */
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content-glass {
+    background-color: rgba(17, 24, 39, 0.7);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(220, 38, 38, 0.6);
+    color: white;
+}
+/* --- End Modal Styles --- */
+
+
+.role-button {
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+}
+.role-button:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+}
+
+.contact-input {
+    background-color: #1f2937;
+    border: 1px solid #374151;
+    color: white;
+    transition: border-color 0.2s;
+}
+.contact-input:focus {
+    border-color: #dc2626;
+    outline: none;
+    box-shadow: 0 0 0 1px #dc2626;
+}
+
+.glass-box-red {
+    background-color: rgba(64, 0, 0, 0.6);
+    backdrop-filter: blur(10px);          
+    border: 1px solid rgba(255, 0, 0, 0.5);
+}
+.tab-button {
+    color: #9ca3af;
+    border-color: transparent;
+}
+.tab-button.active {
+    border-color: #dc2626;
+    color: white;
+    font-weight: 600;
+}
+
+.service-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.1);
+}
+
+#map {
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+}
+
+.controls, .legend {
+    position: absolute;
+    z-index: 1000;
+    background: rgba(18, 18, 18, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(220, 38, 38, 0.4); 
+    color: #ffffff;
+}
+
+.controls {
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    width: 220px;
+}
+
+.legend {
+    bottom: 20px;
+    left: 20px;
+    width: 220px;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #dc2626; 
+}
+
+.filter-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.filter-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background: #2a2a2a;
+    color: #ffffff;
+    text-align: left;
+}
+
+.filter-btn.active {
+    background: #dc2626; 
+    color: #ffffff;
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
+}
+
+.filter-btn:not(.active):hover {
+    background: #3a3a3a;
+    color: #dc2626; 
+}
+
+#location-btn {
+    margin-top: 20px;
+    width: 100%;
+    background: #fcd34d; 
+    color: #000;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#location-btn:hover {
+    background: #fbbd23;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 12px;
+    border: 2px solid #ffffff;
+}
+
+.info-window-content {
+    font-weight: normal;
+    color: #333;
+    font-family: 'Cute Font', cursive;
+    min-width: 200px;
+}
+
+.info-window-content strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.info-window-content .rate-info {
+    font-size: 16px;
+    color: #dc2626; 
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.info-window-content .trust-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #4CAF50;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.info-window-content .category-label {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.request-btn {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 10px;
+    border: none;
+    background-color: #dc2626; 
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.request-btn:hover {
+    background-color: #b91c1c;
+}
+
+.subscription-note {
+    font-size: 11px;
+    color: #777;
+    text-align: center;
+    margin-top: 5px;
+}

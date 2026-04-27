@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServLink - Our Mission for Providers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global ServLink Font */
+        body { 
+        background: url(bg.png) no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Comic Relief', sans-serif;
+        background-color: #000;
+        min-height: 100vh;
+        }
+
+        .nav-link {
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            transition: color 0.2s;
+            font-weight: 700;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #fcd34d; /* Yellow hover/active */
+        }
+        
+        /* Provider-specific Glass Box Style (Red Tinted) */
+        .glass-box-red {
+            background-color: rgba(64, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 0, 0, 0.5); 
+        }
+
+        .pillar-icon {
+            text-shadow: 0 0 10px rgba(252, 211, 77, 0.5); /* Soft yellow glow */
+        }
+    </style>
+</head>
+<body>
+
+    <header class="p-4 sm:p-6 sticky top-0 z-10 bg-black shadow-lg">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-3xl font-extrabold tracking-tight">
+                <span class="text-red-600">Serv</span><span class="text-white">Link</span>
+            </div>
+            
+            <div class="flex items-center space-x-6">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="aboutpr.html" class="nav-link text-yellow-300">About</a>
+                <a href="contactpr.html" class="nav-link">Contact</a>
+                
+                <a href="loginpr.html" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-full transition duration-200 flex items-center">
+                    <i class='bx bx-wrench mr-2'></i> Provider Login
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-6 sm:p-8 text-white">
+        <h1 class="text-5xl font-extrabold mb-8 text-red-500">Empowering Professionals: Why ServLink?</h1>
+        
+        <p class="text-xl text-gray-300 mb-10">
+            ServLink is built for you—the dedicated local provider. We cut out bureaucratic overhead and high commissions so you can focus on what you do best: delivering quality service and building your local reputation.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+            
+            <div class="glass-box-red p-6 rounded-xl shadow-2xl">
+                <i class='bx bx-dollar-circle text-5xl mb-3 text-yellow-300 pillar-icon'></i>
+                <h2 class="text-2xl font-bold mb-3 text-red-400">Keep Your Earnings</h2>
+                <p class="text-gray-300 text-base">
+                    Say goodbye to high platform commissions. Our subscription model ensures you keep **100% of your service income**, giving you financial control and growth potential.
+                </p>
+            </div>
+            
+            <div class="glass-box-red p-6 rounded-xl shadow-2xl">
+                <i class='bx bxs-badge-check text-5xl mb-3 text-yellow-300 pillar-icon'></i>
+                <h2 class="text-2xl font-bold mb-3 text-red-400">Authentic Trust Building</h2>
+                <p class="text-gray-300 text-base">
+                    Earn the **Trust Badge** through verified local endorsements, not just anonymous star ratings. Your high-quality work leads directly to verifiable community trust.
+                </p>
+            </div>
+
+            <div class="glass-box-red p-6 rounded-xl shadow-2xl">
+                <i class='bx bx-chat text-5xl mb-3 text-yellow-300 pillar-icon'></i>
+                <h2 class="text-2xl font-bold mb-3 text-red-400">Direct Client Relationships</h2>
+                <p class="text-gray-300 text-base">
+                    We facilitate direct, transparent communication. Manage requests, discuss details, and build long-term relationships without platform interference.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="mt-10 text-center">
+            <h2 class="text-3xl font-extrabold text-white mb-4">Ready to Grow Your Local Business?</h2>
+            <p class="text-gray-400 mb-6">
+                Register with your Provider Authentication Code to get started today.
+            </p>
+
+            <a href="loginpr.html" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-200 text-lg">
+                Go to Provider Hub
+            </a>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

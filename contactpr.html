@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ServLink - Provider Support</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { 
+        background: url(bg.png) no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Comic Relief', sans-serif; 
+        }
+    body {
+      background-color: #000;
+      min-height: 100vh;
+    }
+
+    .nav-link {
+      color: white;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      transition: color 0.2s;
+      font-weight: 700;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fcd34d; /* Yellow hover/active */
+    }
+
+    /* Provider-specific Glass Box Style (Red Tinted) */
+    .glass-box-red {
+        background-color: rgba(64, 0, 0, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 0, 0, 0.5); 
+    }
+
+    .contact-input-pr {
+      background-color: rgba(30, 0, 0, 0.5); 
+      border: 1px solid #dc2626;
+      color: white;
+      transition: border-color 0.2s;
+    }
+    .contact-input-pr:focus {
+      border-color: #fcd34d;
+      outline: none;
+      box-shadow: 0 0 0 1px #fcd34d;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="p-4 sm:p-6 sticky top-0 z-10 bg-black shadow-lg">
+    <nav class="max-w-7xl mx-auto flex justify-between items-center">
+      <!-- Logo -->
+      <div class="text-3xl font-extrabold tracking-tight">
+        <span class="text-red-600">Serv</span><span class="text-white">Link</span>
+      </div>
+
+      <!-- Navigation + Provider Login Link -->
+      <div class="flex items-center space-x-6">
+        <a href="providerdashboardpr.html" class="nav-link">Home</a>
+        <a href="aboutpr.html" class="nav-link">About</a>
+        <a href="contactpr.html" class="nav-link active">Contact</a>
+        
+        <a href="loginpr.html" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-full transition duration-200 flex items-center">
+            <i class='bx bx-wrench mr-2'></i> Provider Hub
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-3xl mx-auto p-6 sm:p-8 text-white">
+    <h1 class="text-5xl font-extrabold mb-4 text-red-500">Direct Provider Support</h1>
+    <p class="text-lg text-gray-300 mb-8">
+      Need help with your earnings, profile management, or a technical issue? Our dedicated Provider Support team is here for you.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Form -->
+      <div class="glass-box-red p-6 rounded-xl shadow-2xl">
+        <h2 class="text-2xl font-bold mb-4 text-white flex items-center">
+          <i class='bx bx-support text-3xl mr-3'></i> Submit a Support Ticket
+        </h2>
+        <form class="space-y-4">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-400 mb-1">Your Name/Business Name</label>
+            <input type="text" id="name" class="contact-input-pr w-full p-3 rounded-lg" required>
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-400 mb-1">Email (Registered Provider Email)</label>
+            <input type="email" id="email" class="contact-input-pr w-full p-3 rounded-lg" required>
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-400 mb-1">Issue Description</label>
+            <textarea id="message" rows="4" class="contact-input-pr w-full p-3 rounded-lg" required></textarea>
+          </div>
+          <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition duration-200">
+            Submit Ticket
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="p-6">
+        <h2 class="text-2xl font-bold mb-4 text-red-400 flex items-center">
+          <i class='bx bx-info-circle text-3xl mr-3'></i> Quick Contacts
+        </h2>
+        <ul class="space-y-4 text-gray-300">
+          <li class="flex items-center">
+            <i class='bx bxs-envelope text-red-500 mr-2 text-xl'></i> <strong>Support Email:</strong> provider@servlink.com
+          </li>
+          <li class="flex items-center">
+            <i class='bx bxs-phone text-red-500 mr-2 text-xl'></i> <strong>Urgent Line:</strong> (555) 789-0123
+          </li>
+          <li class="flex items-start">
+            <i class='bx bx-time-five text-red-500 mr-2 text-xl mt-1'></i> <strong>Availability:</strong> Mon - Fri, 9am - 5pm Local Time
+          </li>
+        </ul>
+
+        <div class="mt-8">
+          <h3 class="text-xl font-semibold mb-2 text-yellow-300">Provider Resources</h3>
+          <div class="flex space-x-4 text-3xl">
+            <a href="#" aria-label="Documentation" class="text-red-500 hover:text-red-400"><i class='bx bx-book'></i></a>
+            <a href="#" aria-label="FAQ" class="text-red-500 hover:text-red-400"><i class='bx bx-help-circle'></i></a>
+            <a href="providerdashboardpr.html" aria-label="Dashboard" class="text-red-500 hover:text-red-400"><i class='bx bx-tachometer'></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
